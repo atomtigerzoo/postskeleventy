@@ -1,6 +1,6 @@
 {
-    "name": "Skeleventy",
-    "url": "https://skeleventy.netlify.com",
+    "name": "PostSkeleventy",
+    "url": "https://github.com/atomtigerzoo/postskeleventy",
     "author": {
         "name": "Max Power",
         "email": "hello@maxpower.com",
@@ -14,7 +14,7 @@
     },
     "social_links": {
         "facebook": "https://www.facebook.com",
-        "twitter": "https://twitter.com/joe_dyer1",
+        "twitter": "https://twitter.com",
         "linkedin": "https://www.linkedin.com"
     }
 }

@@ -1,12 +1,10 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f4455669-0ce8-40ea-8ff5-5c31f0aadfa5/deploy-status)](https://app.netlify.com/sites/skeleventy/deploys)
+# PostSkeleventy
 
-# Skeleventy
-
-A skeleton boilerplate built with Eleventy and TailwindCSS. Check out [Skeleventy](https://skeleventy.netlify.com/)!
+A skeleton boilerplate built with Eleventy and TailwindCSS.
 
 ## Features
 
-- Build sites faster, with the power of Eleventy, TailwindCSS and SCSS
+- Build sites faster, with the power of Eleventy, TailwindCSS and PostCSS
 - Gulp build pipeline to watch, concatenate and compile styles and scripts
 - HTML minifier
 - Purgecss for removing unused CSS
@@ -36,9 +34,9 @@ Within this, lives a `globals` folder, where you'll find a `site.json` file - fo
 
 A `navigation.json`, which we loop over in the template, to generate our nav and a `helpers.js` which just contains a simple environment helper.
 
-Uncompiled SCSS and JS reside in the `resources` folder - Gulp will be watching these folders for any changes (you should restart the server when creating new partials).
+Uncompiled PostCSS and JS reside in the `resources` folder - Gulp will be watching these folders for any changes (you should restart the server when creating new partials).
 
-When in development mode, Skeleventy will use `main.css` as the stylesheet. This will be pretty chunky in filesize, due to it containing all of Tailwind's utility classes. Once you run the build command ready for deployment, Skeleventy will then reference the minified version of the stylesheet `main.min.css`.
+When in development mode, PostSkeleventy will use `main.css` as the stylesheet. This will be pretty chunky in filesize, due to it containing all of Tailwind's utility classes. Once you run the build command ready for deployment, PostSkeleventy will then reference the minified version of the stylesheet `main.min.css`.
 
 Purge will also run via the build command and will cross reference all of Tailwind's utility classes with your templates/HTML and will remove all the unused ones - pretty cool right?
 
@@ -47,3 +45,9 @@ Purge will also run via the build command and will cross reference all of Tailwi
 Type the `npm run build` command to minify scripts, styles and run Purgecss.
 
 Feel free to adapt this as you wish! Go build some cool stuff and put it on Netlify - seriously it's the future!
+
+# License
+
+MIT
+
+This is a fork from (Skeleventy)[https://github.com/josephdyer/skeleventy], a project from Joseph Dyer.
