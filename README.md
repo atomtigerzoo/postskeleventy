@@ -50,4 +50,4 @@ Feel free to adapt this as you wish! Go build some cool stuff and put it on Netl
 
 MIT
 
-This is a fork from (Skeleventy)[https://github.com/josephdyer/skeleventy], a project from Joseph Dyer.
+This is a fork from [Skeleventy](https://github.com/josephdyer/skeleventy), a project from Joseph Dyer.
