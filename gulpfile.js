@@ -73,8 +73,8 @@ class TailwindExtractor {
 /**
  * Transpile CSS & Tailwind
  */
-const compileCSS = () => {
-  return src(paths.css.source)
+const compileCSS = () => (
+  src(paths.css.source)
     .pipe(
       plumber({ errorHandler: onError })
     )
@@ -95,15 +95,15 @@ const compileCSS = () => {
     .pipe(dest(paths.css.dest))
     .pipe(notify({
       message: 'Tailwind Compile Success'
-    }));
-};
+    }))
+);
 
 
 /**
  * Concatinate and compile scripts
  */
-const compileJS = () => {
-  return src(paths.javascript.source)
+const compileJS = () => (
+  src(paths.javascript.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(babel({
       presets: ['@babel/env'],
@@ -113,16 +113,16 @@ const compileJS = () => {
     .pipe(dest(paths.javascript.dest))
     .pipe(notify({
       message: 'Javascript Compile Success'
-    }));
-};
+    }))
+);
 
 
 /**
  * Minify scripts
  * This will be ran as part of our preflight task
  */
-const minifyJS = () => {
-  return src(paths.javascript.dest + 'main.js')
+const minifyJS = () => (
+  src(`${paths.javascript.dest}main.js`)
     .pipe(rename({
       suffix: '.min'
     }))
@@ -130,8 +130,8 @@ const minifyJS = () => {
     .pipe(dest(paths.javascript.dest))
     .pipe(notify({
       message: 'Javascript Minify Success'
-    }));
-};
+    }))
+);
 
 
 /**
@@ -154,8 +154,8 @@ const watchFiles = (done) => {
  *
  * Compile CSS & Tailwind [PREFLIGHT]
  */
-const compileCSSPreflight = () => {
-  return src(paths.css.source)
+const compileCSSPreflight = () => (
+  src(paths.css.source)
     .pipe(postcss([
       cssImport({ from: `${paths.css.source}main` }),
       require('postcss-nesting'),
@@ -200,15 +200,15 @@ const compileCSSPreflight = () => {
     .pipe(dest('css/'))
     .pipe(notify({
       message: 'CSS & Tailwind [PREFLIGHT] Success'
-    }));
-};
+    }))
+);
 
 
 /**
  * Minify CSS [PREFLIGHT]
  */
-const minifyCSSPreflight = () => {
-  return src([
+const minifyCSSPreflight = () => (
+  src([
     './css/*.css',
     '!./css/*.min.css'
   ])
@@ -219,8 +219,8 @@ const minifyCSSPreflight = () => {
     .pipe(dest('./css'))
     .pipe(notify({
       message: 'Minify CSS [PREFLIGHT] Success'
-    }));
-};
+    }))
+);
 
 
 /**
@@ -242,7 +242,7 @@ exports.build = series(compileCSSPreflight, minifyCSSPreflight, minifyJS);
  * [DEFAULT] task
  * This should always be the last in the gulpfile
  * This will run while you're building the theme and automatically compile any
- * changes. This includes any html changes you make so that the PurgeCSS file 
+ * changes. This includes any html changes you make so that the PurgeCSS file
  * will be updated.
  */
 exports.default = series(compileCSS, compileJS, watchFiles);
