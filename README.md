@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/21491f6b-2445-4988-9718-4d1376364530/deploy-status)](https://app.netlify.com/sites/postskeleventy/deploys)
+
 # PostSkeleventy
 
 A skeleton boilerplate built with Eleventy and TailwindCSS.
