@@ -20,6 +20,7 @@ const purgecss = require('@fullhuman/postcss-purgecss');
 const cssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssCustomMedia = require('postcss-custom-media');
+const postcssNesting = require('postcss-nesting');
 
 
 // Scripts
@@ -65,7 +66,7 @@ const onError = (err) => {
  */
 class TailwindExtractor {
   static extract(content) {
-    return content.match(/[A-z0-9-:\/]+/g) || [];
+    return content.match(/[A-z0-9-:/]+/g) || [];
   }
 }
 
@@ -81,7 +82,7 @@ const compileCSS = () => (
     .pipe(
       postcss([
         cssImport({ from: `${paths.css.source}main` }),
-        require('postcss-nesting'),
+        postcssNesting(),
         postcssCustomMedia(),
         tailwindcss('./tailwind.config.js'),
         postcssPresetEnv({
@@ -158,7 +159,7 @@ const compileCSSPreflight = () => (
   src(paths.css.source)
     .pipe(postcss([
       cssImport({ from: `${paths.css.source}main` }),
-      require('postcss-nesting'),
+      postcssNesting(),
       postcssCustomMedia(),
       tailwindcss('./tailwind.config.js'),
       postcssPresetEnv({
