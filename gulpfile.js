@@ -1,16 +1,21 @@
 
 //  General
-const { gulp, src, dest, watch, series, parallel } = require('gulp');
+const {
+    gulp, src, dest, watch, series, parallel
+} = require('gulp');
 const rename = require('gulp-rename');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 
 // Styles
-const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const cleanCSS = require('gulp-clean-css');
 const tailwindcss = require('tailwindcss');
 const purgecss = require('@fullhuman/postcss-purgecss');
+const cssImport = require('postcss-import');
+const postcssPresetEnv = require('postcss-preset-env');
+const postcssCustomMedia = require('postcss-custom-media');
+
 
 // Scripts
 const babel = require('gulp-babel');
@@ -22,8 +27,8 @@ const uglify = require('gulp-uglify');
  * File paths
  */
 const paths = {
-    sass: {
-        source: './resources/sass/main.scss',
+    css: {
+        source: './resources/css/main.css',
         dest: 'css/'
     },
     javascript: {
@@ -61,24 +66,32 @@ class TailwindExtractor {
 
 
 /**
- * Compile SCSS & Tailwind
+ * Transpile CSS & Tailwind
  */
 const compileCSS = (done) => {
-    return src(paths.sass.source)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(sass())
-    .pipe(postcss([
-        tailwindcss('./tailwind.config.js')
-    ]))
-    .pipe(rename({
-        extname: '.css'
-    }))
-    .pipe(dest(paths.sass.dest))
+    return src(paths.css.source)
+    .pipe(
+        plumber({ errorHandler: onError })
+    )
+    .pipe(
+      postcss([
+        cssImport({ from: `${paths.css.source}main` }),
+        require('postcss-nesting'),
+        postcssCustomMedia(),
+        tailwindcss('./tailwind.config.js'),
+        postcssPresetEnv({
+          stage: 2,
+          features: {
+            'nesting-rules': true
+          }
+        })
+      ])
+    )
+    .pipe(dest(paths.css.dest))
     .pipe(notify({
         message: 'Tailwind Compile Success'
     }));
-    done();
-}
+};
 
 
 /**
@@ -127,7 +140,7 @@ const watchFiles = (done) => {
         'site/includes/**/*.njk',
     ], series(compileCSS));
     watch('./tailwind.config.js', series(compileCSS));
-    watch('./resources/sass/**/*.scss', series(compileCSS));
+    watch('./resources/css/**/*.css', series(compileCSS));
     watch('./resources/js/**/*.js', series(compileJS));
     done();
 }
@@ -136,13 +149,21 @@ const watchFiles = (done) => {
 /**
  * CSS Preflight
  *
- * Compile SCSS & Tailwind [PREFLIGHT]
+ * Compile CSS & Tailwind [PREFLIGHT]
  */
 const compileCSSPreflight = (done) => {
-    return src(paths.sass.source)
-    .pipe(sass())
+    return src(paths.css.source)
     .pipe(postcss([
+        cssImport({ from: `${paths.css.source}main` }),
+        require('postcss-nesting'),
+        postcssCustomMedia(),
         tailwindcss('./tailwind.config.js'),
+        postcssPresetEnv({
+          stage: 2,
+          features: {
+            'nesting-rules': true
+          }
+        }),
         purgecss({
             content: [
                 'site/*.njk',
@@ -175,14 +196,11 @@ const compileCSSPreflight = (done) => {
             ],
         })
     ]))
-    .pipe(rename({
-        extname: '.css'
-    }))
     .pipe(dest('css/'))
     .pipe(notify({
         message: 'CSS & Tailwind [PREFLIGHT] Success'
     }));
-}
+};
 
 
 /**
@@ -201,7 +219,7 @@ const minifyCSSPreflight = (done) => {
     .pipe(notify({
         message: 'Minify CSS [PREFLIGHT] Success'
     }));
-}
+};
 
 
 /**

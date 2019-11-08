@@ -3,8 +3,13 @@
 	"version": "1.0.0",
 	"description": "Skeleventy - A skeleton boilerplate built with Eleventy",
 	"scripts": {
-		"dev": "ELEVENTY_ENV=development eleventy --config=eleventy.config.js --serve & gulp",
-		"build": "gulp build && eleventy --config=eleventy.config.js"
+		"dev": "npm-run-all --parallel dev:eleventy dev:gulp",
+		"dev:eleventy": "cross-env ELEVENTY_ENV=development eleventy --config=eleventy.config.js --serve",
+		"dev:gulp": "cross-env-shell gulp",
+		"build": "npm-run-all --parallel build:gulp build:eleventy",
+		"build:gulp": "gulp build",
+		"build:eleventy": "eleventy --config=eleventy.config.js",
+		"serve": "serve dist"
 	},
 	"repository": {
 		"type": "git",
@@ -25,9 +30,16 @@
 		"gulp-plumber": "^1.2.1",
 		"gulp-postcss": "^8.0.0",
 		"gulp-rename": "^1.4.0",
-		"gulp-sass": "^4.0.2",
 		"gulp-uglify": "^3.0.2",
 		"html-minifier": "^4.0.0",
+		"postcss-custom-media": "^7.0.8",
+		"postcss-import": "^12.0.1",
+		"postcss-preset-env": "^6.7.0",
 		"tailwindcss": "^1.0.5"
+	},
+	"dependencies": {
+		"cross-env": "^6.0.3",
+		"npm-run-all": "^4.1.5",
+		"serve": "^11.2.0"
 	}
 }
