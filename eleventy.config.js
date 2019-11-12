@@ -2,6 +2,9 @@ const htmlmin = require('html-minifier');
 const filtersDates = require('./filters/dates.js');
 const filtersTimestamp = require('./filters/timestamp.js');
 
+// Toggle minification of HTML code
+const minifyHtml = true;
+
 module.exports = (eleventyConfig) => {
   // Add a readable date formatter filter to Nunjucks
   eleventyConfig.addFilter('dateDisplay', filtersDates);
@@ -11,7 +14,7 @@ module.exports = (eleventyConfig) => {
 
   // Minify our HTML
   eleventyConfig.addTransform('htmlmin', (content, outputPath) => {
-    if (outputPath.endsWith('.html')) {
+    if (minifyHtml && outputPath.endsWith('.html')) {
       const minified = htmlmin.minify(content, {
         useShortDoctype: true,
         removeComments: true,
