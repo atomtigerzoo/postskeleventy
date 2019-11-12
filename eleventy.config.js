@@ -40,7 +40,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('images');
 
   return {
-    templateFormats: ['md', 'njk'],
+    templateFormats: ['md', 'njk', 'txt'],
     markdownTemplateEngine: 'njk',
     htmlTemplateEngine: 'njk',
     passthroughFileCopy: true,
