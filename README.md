@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/21491f6b-2445-4988-9718-4d1376364530/deploy-status)](https://app.netlify.com/sites/postskeleventy/deploys)
 
-# PostSkeleventy
+# 🦴 PostSkeleventy
 
 A skeleton boilerplate built with Eleventy and TailwindCSS.
 
@@ -16,40 +16,57 @@ A skeleton boilerplate built with Eleventy and TailwindCSS.
 
 ## Requirements
 
-Node `>=` v8.9.0
+node.js, Git, _(to be completed)_
 
 ## Installation
+
+From within a terminal, shell or commandline clone this repository with git to your computer:
+
+```
+git clone https://github.com/atomtigerzoo/postskeleventy.git
+```
+
+Enter the directory with `cd postskeleventy` and install all packages with:
 
 ```
 npm install
 ```
 
-`cd` into your project folder and type the `npm run dev` command into terminal, to start the development server and Gulp. Eleventy has baked in hot reloading and will files for changes.
+Inside the project folder run `npm run dev` from within the terminal, to start a development server and let Gulp watch your files. 
+Eleventy has baked in hot reloading and will watch the files for changes.
 
-_For those of you on Windows, [see Daniel Schildt's potential fix](https://github.com/josephdyer/skeleventy/issues/2#issuecomment-465754702) for the environment helper._
+### Windows environment variables
+
+For those of you on Windows, [see Daniel Schildt's potential fix](https://github.com/josephdyer/skeleventy/issues/2#issuecomment-465754702) for the environment helper. It is already built in into this project starter.
 
 ## Folder Structure
 
-The `site` folder contains all the templates, pages and content, which Eleventy will watch and parse into HTML for us.
+The folder `site` contains all templates, pages and content - which Eleventy will watch and parse into HTML for us.
 
-Within this, lives a `globals` folder, where you'll find a `site.json` file - for general site config stuff e.g name, author, email, social media...etc.
+Within this folder, you have a `globals` folder, where you'll find a `site.json` file. Inside is everything for general site config e.g. url, name, author, email, social media... etc. You can extend it to your likening.
 
-A `navigation.json`, which we loop over in the template, to generate our nav and a `helpers.js` which just contains a simple environment helper.
+Also inside the `globals` folder lies `navigation.json`, which Eleventy loops over to generate the navigation. The `helpers.js` contains the environment variable.
 
-Uncompiled PostCSS and JS reside in the `resources` folder - Gulp will be watching these folders for any changes (you should restart the server when creating new partials).
+Uncompiled PostCSS _(you can also just write normal CSS if you like)_ and Javascript resides in the `resources` folder. Gulp will be watching these folders for any changes and compile those while running dev or build. *After creating new partials or files, you should restart the server to have them all inside the watch process!*
 
-When in development mode, PostSkeleventy will use `main.css` as the stylesheet. This will be pretty chunky in filesize, due to it containing all of Tailwind's utility classes. Once you run the build command ready for deployment, PostSkeleventy will then reference the minified version of the stylesheet `main.min.css`.
+While in development mode, PostSkeleventy will use `/css/main.css` as the stylesheet. This will be pretty chunky in filesize, due to it containing all of Tailwinds utility classes. Once you run the build command, PostSkeleventy will then reference the minified version of the stylesheet `/css/main.min.css`.
 
-Purge will also run via the build command and will cross reference all of Tailwind's utility classes with your templates/HTML and will remove all the unused ones - pretty cool right?
+PurgeCSS (when running build) cross references all of Tailwinds utility classes with your templates/HTML and will remove all the unused CSS and classes.
 
-## Ready to deploy?
+## Ready to build and deploy?
 
-Type the `npm run build` command to minify scripts, styles and run Purgecss.
+Run `npm run build` inside the project folder to build/copy your all files, minify scripts and styles and run Purgecss.
 
-Feel free to adapt this as you wish! Go build some cool stuff and put it on Netlify - seriously it's the future!
+After the build you can run `npm run serve` to get a preview on `http://localhost:5000`.
 
-# License
+Now copy the whole content of the `dist` folder to the hosting provider of your choice.
+
+---
+
+## License
 
 MIT
 
 This is a fork from [Skeleventy](https://github.com/josephdyer/skeleventy), a project from Joseph Dyer.
+
+Feel free to adapt this as you wish! Go build some cool stuff - seriously it's the future!
