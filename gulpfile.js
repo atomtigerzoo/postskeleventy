@@ -32,19 +32,17 @@ const uglify = require('gulp-uglify');
 /**
  * File paths
  */
+const basepath = './src/site/includes/';
 const paths = {
   css: {
-    source: './resources/css/main.css',
-    dest: 'css/'
+    source: `${basepath}css/styles.css`,
+    dest: './src/site/temp/css'
   },
-  javascript: {
-    source:
-    [
-      './resources/js/utilities/*.js',
-      './resources/js/local/*.js'
-    ],
-    dest: 'javascript/'
-  }
+  js: {
+    source: `${basepath}js/*.js`,
+    dest: './src/site/temp/js'
+  },
+  tailwindconfig: './tailwind.config.js'
 };
 
 
@@ -81,10 +79,10 @@ const compileCSS = () => (
     )
     .pipe(
       postcss([
-        cssImport({ from: `${paths.css.source}main` }),
+        cssImport({ from: `${paths.css.source}styles` }),
         postcssNesting(),
         postcssCustomMedia(),
-        tailwindcss('./tailwind.config.js'),
+        tailwindcss(paths.tailwindconfig),
         postcssPresetEnv({
           stage: 2,
           features: {
@@ -104,14 +102,14 @@ const compileCSS = () => (
  * Concatinate and compile scripts
  */
 const compileJS = () => (
-  src(paths.javascript.source)
+  src(paths.js.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(babel({
       presets: ['@babel/env'],
       sourceType: 'script'
     }))
-    .pipe(concat('main.js'))
-    .pipe(dest(paths.javascript.dest))
+    .pipe(concat('scripts.js'))
+    .pipe(dest(paths.js.dest))
     .pipe(notify({
       message: 'Javascript Compile Success'
     }))
@@ -123,12 +121,12 @@ const compileJS = () => (
  * This will be ran as part of our preflight task
  */
 const minifyJS = () => (
-  src(`${paths.javascript.dest}main.js`)
+  src(`${paths.js.dest}scripts.js`)
     .pipe(rename({
       suffix: '.min'
     }))
     .pipe(uglify())
-    .pipe(dest(paths.javascript.dest))
+    .pipe(dest(paths.js.dest))
     .pipe(notify({
       message: 'Javascript Minify Success'
     }))
@@ -140,12 +138,12 @@ const minifyJS = () => (
  */
 const watchFiles = (done) => {
   watch([
-    'site/*.njk',
-    'site/includes/**/*.njk',
+    'src/site/*.njk',
+    `${basepath}/**/*.njk`,
   ], series(compileCSS));
-  watch('./tailwind.config.js', series(compileCSS));
-  watch('./resources/css/**/*.css', series(compileCSS));
-  watch('./resources/js/**/*.js', series(compileJS));
+  watch(paths.tailwindconfig, series(compileCSS));
+  watch(`${basepath}css/**/*.css`, series(compileCSS));
+  watch(`${basepath}js/**/*.js`, series(compileJS));
   done();
 };
 
@@ -158,10 +156,10 @@ const watchFiles = (done) => {
 const compileCSSPreflight = () => (
   src(paths.css.source)
     .pipe(postcss([
-      cssImport({ from: `${paths.css.source}main` }),
+      cssImport({ from: `${paths.css.source}styles` }),
       postcssNesting(),
       postcssCustomMedia(),
-      tailwindcss('./tailwind.config.js'),
+      tailwindcss(paths.tailwindconfig),
       postcssPresetEnv({
         stage: 2,
         features: {
@@ -170,8 +168,8 @@ const compileCSSPreflight = () => (
       }),
       purgecss({
         content: [
-          'site/*.njk',
-          'site/includes/**/*.njk',
+          'src/site/*.njk',
+          `${basepath}**/*.njk`,
         ],
         extractors: [{
           extractor: TailwindExtractor,
@@ -181,8 +179,8 @@ const compileCSSPreflight = () => (
          * You can whitelist selectors to stop purgecss from removing them from your CSS.
          * see: https://www.purgecss.com/whitelisting
          *
-         * Any selectors defined below will not be stripped from the main.min.css file.
-         * PurgeCSS will not purge the main.css file, as this is useful for development.
+         * Any selectors defined below will not be stripped from the styles.min.css file.
+         * PurgeCSS will not purge the styles.css file, as this is useful for development.
          *
          * @since 1.0.0
          */
@@ -198,7 +196,7 @@ const compileCSSPreflight = () => (
         ],
       })
     ]))
-    .pipe(dest('css/'))
+    .pipe(dest(paths.css.dest))
     .pipe(notify({
       message: 'CSS & Tailwind [PREFLIGHT] Success'
     }))
@@ -210,14 +208,14 @@ const compileCSSPreflight = () => (
  */
 const minifyCSSPreflight = () => (
   src([
-    './css/*.css',
-    '!./css/*.min.css'
+    `${paths.css.dest}*.css`,
+    `!${paths.css.dest}*.min.css`
   ])
     .pipe(cleanCSS())
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(dest('./css'))
+    .pipe(dest(paths.css.dest))
     .pipe(notify({
       message: 'Minify CSS [PREFLIGHT] Success'
     }))

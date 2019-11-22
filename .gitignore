@@ -1,4 +1,6 @@
-.DS_Store
+# site related
+build/
 node_modules/
-dist/
-package-lock.json
+
+# other
+.DS_Store

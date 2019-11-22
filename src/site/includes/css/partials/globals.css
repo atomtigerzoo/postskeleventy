@@ -1,0 +1,11 @@
+/*
+	Globals
+ */
+
+body{
+	@apply text-lg text-gray-900;
+}
+
+a{
+	text-decoration: underline;
+}

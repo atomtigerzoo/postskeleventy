@@ -1,0 +1,13 @@
+/*
+	The main css file for importing everything
+ */
+
+/* Load tailwind base + components first */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/* Import your partials */
+@import "partials/globals";
+
+/* Load tailwind utilities last */
+@import "tailwindcss/utilities";
