@@ -1,38 +1,38 @@
 <!doctype html>
 <html lang="{{ site.lang }}">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if meta_title %}{{ meta_title }}{% else %}{{ title }}{% endif %} | {{ site.name }}</title>
-  <meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{{ excerpt }}{% endif %}">
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-  {% if helpers.environment == "development" %}
-    <link rel="stylesheet" href="/css/styles.css">
-  {% else %}
-    <link rel="stylesheet" href="/css/styles.min.css">
-  {% endif %}
-  <link rel="icon" type="image/png" href="{{ site.images.favicon }}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% if meta_title %}{{ meta_title }}{% else %}{{ title }}{% endif %} | {{ site.name }}</title>
+	<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{{ excerpt }}{% endif %}">
+	<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+	{% if helpers.environment == "development" %}
+		<link rel="stylesheet" href="/css/styles.css">
+	{% else %}
+		<link rel="stylesheet" href="/css/styles.min.css">
+	{% endif %}
+	<link rel="icon" type="image/png" href="{{ site.images.favicon }}">
 </head>
 
 <body>
 
 <div class="wrapper flex flex-col relative min-h-screen">
 
-  {# include header #}
-  {% include "components/header.njk" %}
+	{# include header #}
+	{% include "components/header.njk" %}
 
-  {# include content #}
-  {{ content | safe }}
+	{# include content #}
+	{{ content | safe }}
 
-  {# include footer #}
-  {% include "components/footer.njk" %}
+	{# include footer #}
+	{% include "components/footer.njk" %}
 
 </div>
 
 {% if helpers.environment == "development" %}
-  <script src="/js/scripts.js"></script>
+	<script src="/js/scripts.js"></script>
 {% else %}
-  <script src="/js/scripts.min.js"></script>
+	<script src="/js/scripts.min.js"></script>
 {% endif %}
 
 </body>

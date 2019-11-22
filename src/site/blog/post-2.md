@@ -5,8 +5,8 @@ featured_image: /images/blog/post-2.jpg
 image_caption: Photo by Jonathan Velasquez on Unsplash
 excerpt: A podcast is an episodic series of digital audio files which a user can subscribe to so that new episodes are automatically downloaded via web syndication to the user’s own local computer, mobile application, or portable media player.
 tags:
-    - blog
-    - digital
+  - blog
+  - digital
 ---
 
 A Podcast is an episodic series of digital audio files which a user can subscribe to so that new episodes are automatically downloaded via web syndication to the user’s own local computer, mobile application, or portable media player.

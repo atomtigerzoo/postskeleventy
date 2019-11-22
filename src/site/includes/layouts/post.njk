@@ -2,112 +2,74 @@
 layout: default
 ---
 
-<main id="main" class="main flex flex-1 flex-col md:flex-row py-10 px-6 lg:px-0 lg:py-20">
+<main class="flex flex-1 flex-col md:flex-row py-10 px-6 lg:px-0 lg:py-20">
+  <section class="flex-1 container ml-auto mr-auto lg:px-32">
 
-    <section id="container-centre" class="flex-1 container ml-auto mr-auto lg:px-32">
+    <div class="mb-12 md:mb-20">
+      <h1 class="text-3xl md:text-center md:text-5xl lg:text-6xl">{{ title }}</h1>
 
-        <div class="post-header mb-12 md:mb-20">
+      <div class="text-sm md:text-base text-gray-600 flex justify-center">
+        <p>By {{ site.author.name }}</p>
 
-            <h1 class="page-title text-3xl md:text-center md:text-5xl lg:text-6xl">{{ title }}</h1>
+        <p class="px-2">—</p>
 
-            <div class="text-sm md:text-base text-gray-600 flex justify-center">
+        <time datetime="{{ date }}">
+          {{ date | dateDisplay }}
+        </time>
 
-                <p class="author">By {{ site.author.name }}</p>
+        {% if tags %}
+          {# this will create a comma for multiple category links #}
+          {% set comma = joiner() %}
 
-                <p class="px-2">—</p>
+          <p class="px-2">—</p>
+          <p>Posted in
+            {% for item in tags %}
+              {%- if item != "blog" -%}
+                <a href="/category/{{ item }}">{{ comma() }} {{ item | capitalize }}</a>
+              {%- endif -%}
+            {% endfor %}
+          </p>
+        {% endif %}
+      </div>
 
-                <time datetime="{{ date }}">
-                    {{ date | dateDisplay }}
-                </time>
+      {# featured post image #}
+      {% if featured_image %}
+        <figure class="mt-10 md:mt-20">
+          <img src="{{ featured_image }}" alt="{{ image_caption }}">
+          {% if image_caption %}
+            <figcaption class="text-center text-sm italic text-gray-600 mt-4">{{ image_caption }}</figcaption>
+          {% endif %}
+        </figure>
+      {% endif %}
+    </div>
 
-                {% if tags %}
+    <div class="md:px-16">
+      {{ content | safe }}
 
-                    {# this will create a comma for multiple category links #}
-                    {% set comma = joiner() %}
+      {# category links list #}
+      {% if tags %}
+        <ul class="flex pt-8 border-t border-gray-100">
+          {% for item in tags %}
+            {%- if item != "blog" -%}
+              <li class="mr-2">
+                <a class="inline-block border border-pink-300 px-4 py-2 text-pink-500 text-xs font-semibold rounded hover:text-white hover:bg-pink-500 hover:border-pink-500" href="/category/{{ item }}">{{ item | capitalize }}</a>
+              </li>
+            {%- endif -%}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
 
-                    <p class="px-2">—</p>
+    {# author card #}
+    <div class="flex flex-col justify-center w-3/4 md:w-2/5 m-auto mt-16 px-12 pb-12 shadow-md rounded-lg text-center">
+      <figure class="mb-4">
+        <img class="block rounded-full m-auto w-64 p-8 md:p-12" src="{{ site.author.avatar }}" alt="{{ site.author.name }}">
+        <figcaption class="font-bold text-pink-500">{{ site.author.name }}</figcaption>
+      </figure>
 
-                    <p class="category">Posted in
+      <p class="text-sm mb-8">I've spent all my life on top of a mountain, learning the way of the Ninja Dev.</p>
+      {% include 'components/social-icons.njk' %}
+    </div>
 
-                        {% for item in tags %}
-
-                            {%- if item != "blog" -%}
-
-                                <a href="/category/{{ item }}">{{ comma() }} {{ item | capitalize }}</a>
-
-                            {%- endif -%}
-
-                        {% endfor %}
-
-                    </p>
-
-                {% endif %}
-
-            </div>
-
-            {# featured post image #}
-            {% if featured_image %}
-
-                <figure class="mt-10 md:mt-20">
-
-                    <img src="{{ featured_image }}" alt="{{ image_caption }}">
-
-                    {% if image_caption %}
-
-                        <figcaption class="text-center text-sm italic text-gray-600 mt-4">{{ image_caption }}</figcaption>
-
-                    {% endif %}
-
-                </figure>
-
-            {% endif %}
-
-        </div>
-
-        <div class="content post md:px-16">
-
-            {{ content | safe }}
-
-            {# category links list #}
-            {% if tags %}
-
-                <ul class="flex pt-8 border-t border-gray-100">
-
-                    {% for item in tags %}
-
-                        {%- if item != "blog" -%}
-
-                            <li class="mr-2">
-                                <a class="inline-block border border-pink-300 px-4 py-2 text-pink-500 text-xs font-semibold rounded hover:text-white hover:bg-pink-500 hover:border-pink-500" href="/category/{{ item }}">{{ item | capitalize }}</a>
-                            </li>
-
-                        {%- endif -%}
-
-                    {% endfor %}
-
-                </ul>
-
-            {% endif %}
-
-        </div>
-
-        {# author card #}
-        <div class="author-card flex flex-col justify-center w-3/4 md:w-2/5 m-auto mt-16 px-12 pb-12 shadow-md rounded-lg text-center">
-
-            <figure class="mb-4">
-
-                <img class="block rounded-full m-auto w-64 p-8 md:p-12" src="{{ site.author.avatar }}" alt="{{ site.author.name }}">
-
-                <figcaption class="font-bold text-pink-500">{{ site.author.name }}</figcaption>
-
-            </figure>
-
-            <p class="text-sm mb-8">I've spent all my life on top of a mountain, learning the way of the Ninja Dev.</p>
-
-            {% include 'components/social-icons.njk' %}
-
-        </div>
-
-    </section>
-
+  </section>
 </main>

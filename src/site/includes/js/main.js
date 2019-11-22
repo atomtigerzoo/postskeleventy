@@ -1,4 +1,4 @@
 /*
 	scripts & methods
 */
-console.log('👋 Javascript ready!')
+console.log('👋 Javascript ready!');

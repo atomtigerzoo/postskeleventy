@@ -5,28 +5,23 @@ meta_description: Homepage description
 body_class: home
 title: Welcome to PostSkeleventy!
 ---
+<main class="container m-auto flex flex-1 flex-col md:flex-row py-10 px-6 lg:px-0 lg:py-20">
 
-<main id="main" class="main container m-auto flex flex-1 flex-col md:flex-row py-10 px-6 lg:px-0 lg:py-20">
+  <section class="flex-1">
 
-    <section id="container-centre" class="flex-1">
+    <h1 class="text-5xl">{{ title }}</h1>
+    <p>A skeleton boilerplate built with Eleventy, Gulp and TailwindCSS</p>
 
-        <h1 class="page-title text-5xl">{{ title }}</h1>
+    <h2 class="mt-8 mb-2 text-3xl">Features</h2>
+    
+    <ul class="mb-12 list-disc pl-4">
+      <li>TailwindCSS as utility-first CSS framework</li>
+      <li>Gulp to watch &amp; compile your TailwindCSS, PostCSS and Javascript files</li>
+      <li>PurgeCSS to remove any unused CSS</li>
+      <li>HTML minifier to compress built files</li>
+      <li>Includes an example blog, with categories and featured images</li>
+    </ul>
 
-        <div class="content">
-            <p>A skeleton boilerplate built with <a href="https://www.11ty.io">Eleventy</a> and <a href="https://tailwindcss.com">Tailwind CSS</a>.</p>
-
-            <h2 class="text-3xl">Features</h2>
-
-            <ul class="mb-12 list-disc pl-4">
-                <li>Tailwind CSS for beautiful and fast UI styling</li>
-                <li>Gulp to watch and compile your Tailwind, PostCSS &amp; JS files</li>
-                <li><a href="https://www.purgecss.com/">Purgecss</a> to remove any unused CSS</li>
-                <li>HTML minifier</li>
-                <li>A simple blog, with categories and featured images</li>
-            </ul>
-
-        </div>
-
-    </section>
+  </section>
 
 </main>
