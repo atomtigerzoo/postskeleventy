@@ -9,7 +9,7 @@
 		"build": "npm-run-all --parallel build:gulp build:eleventy",
 		"build:gulp": "gulp build",
 		"build:eleventy": "eleventy --config=eleventy.config.js",
-		"serve": "serve dist"
+		"serve": "serve build"
 	},
 	"repository": {
 		"type": "git",

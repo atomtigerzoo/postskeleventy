@@ -59,7 +59,7 @@ Run `npm run build` inside the project folder to build/copy your all files, mini
 
 After the build you can run `npm run serve` to get a preview on `http://localhost:5000`.
 
-Now copy the whole content of the `dist` folder to the hosting provider of your choice.
+Now copy the whole content of the `build` folder to the hosting provider of your choice.
 
 ---
 
