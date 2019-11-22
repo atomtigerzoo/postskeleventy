@@ -1,3 +1,5 @@
+// Plugins
+const cacheBuster = require('@mightyplow/eleventy-plugin-cache-buster');
 const htmlmin = require('html-minifier');
 const filtersDates = require('./src/filters/dates.js');
 const filtersTimestamp = require('./src/filters/timestamp.js');
@@ -6,6 +8,15 @@ const filtersTimestamp = require('./src/filters/timestamp.js');
 const minifyHtml = false;
 
 module.exports = (config) => {
+  // Cache buster plugin
+  const cacheBusterOptions = {
+    outputDirectory: 'build',
+    createResourceHash(outputDirectoy, url, target) {
+      return Date.now();
+    }
+  };
+  config.addPlugin(cacheBuster(cacheBusterOptions));
+
   // Add a readable date formatter filter to Nunjucks
   config.addFilter('dateDisplay', filtersDates);
 
