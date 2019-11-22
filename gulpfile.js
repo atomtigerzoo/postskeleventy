@@ -36,11 +36,11 @@ const basepath = './src/site/includes/';
 const paths = {
   css: {
     source: `${basepath}css/styles.css`,
-    dest: './src/site/temp/css'
+    dest: './src/site/temp/css/'
   },
   js: {
     source: `${basepath}js/*.js`,
-    dest: './src/site/temp/js'
+    dest: './src/site/temp/js/'
   },
   tailwindconfig: './tailwind.config.js'
 };
