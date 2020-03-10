@@ -63,7 +63,7 @@ const onError = (err) => {
  * Tailwind extractor
  */
 const TailwindExtractor = content => (
-  content.match(/[\w-/:]*[\w-/:]/g) || []
+  content.match(/[\w-/:]+(?<!:)/g) || []
 );
 
 
