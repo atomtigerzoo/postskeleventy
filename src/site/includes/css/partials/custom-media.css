@@ -1,0 +1,11 @@
+/*
+	Custom media breakpoints
+
+	Reflects the default screen sizes from tailwindcss.
+	See the documentation here: https://tailwindcss.com/docs/breakpoints/
+ */
+
+@custom-media --sm (min-width: 640px);
+@custom-media --md (min-width: 768px);
+@custom-media --lg (min-width: 1024px);
+@custom-media --xl (min-width: 1280px);

@@ -6,8 +6,14 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 
-/* Import your partials */
+
+/* Import important partials first */
+@import "partials/custom-media";
 @import "partials/globals";
+
+/* Import other partials */
+/* @import "partials/something"; */
+
 
 /* Load tailwind utilities last */
 @import "tailwindcss/utilities";

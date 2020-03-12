@@ -3,7 +3,11 @@
  */
 
 body{
-	@apply text-lg text-gray-900;
+	@apply text-base text-gray-900;
+
+	@media(--xl) {
+		@apply text-lg;
+	}
 }
 
 a{
