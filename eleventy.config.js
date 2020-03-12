@@ -50,6 +50,9 @@ module.exports = (config) => {
   config.addPassthroughCopy({ 'src/site/temp/css': 'css' });
   config.addPassthroughCopy({ 'src/site/temp/js': 'js' });
 
+  // Want to use selfhosted fonts? Uncomment the following line:
+  //config.addPassthroughCopy('src/site/fonts');
+
   return {
     dir: {
       input: 'src/site',

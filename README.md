@@ -52,6 +52,31 @@ While in development mode, PostSkeleventy will use `/src/site/temp/` as temporar
 
 PurgeCSS (when running build) cross references all of Tailwinds utility classes with your templates/HTML and will remove all the unused CSS and classes.
 
+## Self-hosted fonts
+
+If you would like to use self-hosted webfonts within your project, then go ahead an uncomment the following line in `eleventy.config.js`:
+
+	//config.addPassthroughCopy('src/site/fonts');
+
+This will copy the folder `src/site/fonts/` - where you can keep your fonts - and all its content to the build folder. Feel free to rename the folder and path to your likings.
+
+## Configuration and settings
+
+Folder paths, passthrough files and formats can be found in `eleventy.config.js`.
+
+### Site and blog author settings
+
+Please see the file `src/site/data/site.json` for some settings and defaults.
+
+### Navigation
+
+The navigation links can be found inside `src/site/data/navigation.json`. 
+This is used in `src/site/includes/components/nav.njk` for example but can be used in other places too.
+
+### Minify HTML on build
+
+You can minify your HTML with the build process by setting `const minifyHtml = false;` to `true` inside the file `eleventy.config.js`.
+
 ## Ready to build and deploy?
 
 Run `npm run build` inside the project folder to build/copy your all files, minify scripts and styles and run Purgecss.
