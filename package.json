@@ -1,6 +1,6 @@
 {
 	"name": "postskeleventy",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "PostSkeleventy - A skeleton boilerplate built with Eleventy",
 	"scripts": {
 		"dev": "npm-run-all --parallel dev:eleventy dev:gulp",
@@ -18,10 +18,9 @@
 	"author": "Henning Stein",
 	"license": "MIT",
 	"devDependencies": {
-		"@11ty/eleventy": "^0.10.0",
-		"@babel/core": "^7.10.5",
-		"@babel/preset-env": "^7.10.4",
-		"@fullhuman/postcss-purgecss": "^2.3.0",
+		"@11ty/eleventy": "^0.11.1",
+		"@babel/core": "^7.12.16",
+		"@babel/preset-env": "^7.12.16",
 		"@mightyplow/eleventy-plugin-cache-buster": "^1.1.3",
 		"gulp": "^4.0.2",
 		"gulp-babel": "^8.0.0",
@@ -29,19 +28,21 @@
 		"gulp-concat": "^2.6.1",
 		"gulp-notify": "^3.2.0",
 		"gulp-plumber": "^1.2.1",
-		"gulp-postcss": "^8.0.0",
-		"gulp-rename": "^1.4.0",
+		"gulp-postcss": "^9.0.0",
+		"gulp-rename": "^2.0.0",
 		"gulp-uglify": "^3.0.2",
-		"postcss-custom-media": "^7.0.8",
-		"postcss-import": "^12.0.1",
+		"postcss-custom-media": "^8.0.0",
+		"postcss-import": "^14.0.0",
 		"postcss-nesting": "^7.0.1",
 		"postcss-preset-env": "^6.7.0",
-		"tailwindcss": "^1.5.1"
+		"tailwindcss": "^2.0.3"
 	},
 	"dependencies": {
-		"cross-env": "^7.0.2",
+		"autoprefixer": "^10.2.4",
+		"cross-env": "^7.0.3",
 		"html-minifier": "^4.0.0",
 		"npm-run-all": "^4.1.5",
+		"postcss": "^8.2.6",
 		"serve": "^11.3.2"
 	}
 }
