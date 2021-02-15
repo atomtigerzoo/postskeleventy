@@ -16,7 +16,6 @@ const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const cleanCSS = require('gulp-clean-css');
 const tailwindcss = require('tailwindcss');
-const purgecss = require('@fullhuman/postcss-purgecss');
 const cssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssCustomMedia = require('postcss-custom-media');
@@ -163,35 +162,6 @@ const compileCSSPreflight = () => (
         features: {
           'nesting-rules': true
         }
-      }),
-      purgecss({
-        content: [
-          'src/site/*.njk',
-          `${basepath}**/*.njk`,
-        ],
-        extractors: [{
-          extractor: TailwindExtractor,
-          extensions: ['html', 'njk'],
-        }],
-        /**
-         * You can whitelist selectors to stop purgecss from removing them from your CSS.
-         * see: https://www.purgecss.com/whitelisting
-         *
-         * Any selectors defined below will not be stripped from the styles.min.css file.
-         * PurgeCSS will not purge the styles.css file, as this is useful for development.
-         *
-         * @since 1.0.0
-         */
-        whitelist: [
-          'body',
-          'html',
-          'h1',
-          'h2',
-          'h3',
-          'p',
-          'blockquote',
-          'intro'
-        ],
       })
     ]))
     .pipe(dest(paths.css.dest))

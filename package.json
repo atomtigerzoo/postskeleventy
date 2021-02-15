@@ -6,7 +6,7 @@
 		"dev": "npm-run-all --parallel dev:eleventy dev:gulp",
 		"dev:eleventy": "cross-env ELEVENTY_ENV=development eleventy --config=eleventy.config.js --serve",
 		"dev:gulp": "cross-env-shell gulp",
-		"build": "npm-run-all --parallel build:gulp build:eleventy",
+		"build": "cross-env NODE_ENV=production npm-run-all --parallel build:gulp build:eleventy",
 		"build:gulp": "gulp build",
 		"build:eleventy": "eleventy --config=eleventy.config.js",
 		"serve": "serve build"
