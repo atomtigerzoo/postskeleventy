@@ -1,6 +1,6 @@
 {
 	"name": "postskeleventy",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "PostSkeleventy - A skeleton boilerplate built with Eleventy",
 	"scripts": {
 		"dev": "npm-run-all --parallel dev:eleventy dev:gulp",
