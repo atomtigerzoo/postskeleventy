@@ -8,8 +8,8 @@
 const {
   gulp, src, dest, watch, series, parallel
 } = require('gulp');
+const log = require('fancy-log');
 const rename = require('gulp-rename');
-const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 
 // Styles
@@ -49,11 +49,7 @@ const paths = {
  * Errors function
  */
 const onError = (err) => {
-  notify.onError({
-    title: 'Gulp Error - Compile Failed',
-    message: 'Error: <%= error.message %>'
-  })(err);
-
+  log.error('Gulp failed with <%= err.message %>');
   this.emit('end');
 };
 
@@ -89,9 +85,7 @@ const compileCSS = () => (
       ])
     )
     .pipe(dest(paths.css.dest))
-    .pipe(notify({
-      message: 'Tailwind Compile Success'
-    }))
+    .on('end', () => { log.info('CSS compilation successful'); })
 );
 
 
@@ -107,9 +101,7 @@ const compileJS = () => (
     }))
     .pipe(concat('scripts.js'))
     .pipe(dest(paths.js.dest))
-    .pipe(notify({
-      message: 'Javascript Compile Success'
-    }))
+    .on('end', () => { log.info('JS compilation successful'); })
 );
 
 
@@ -124,9 +116,7 @@ const minifyJS = () => (
     }))
     .pipe(uglify())
     .pipe(dest(paths.js.dest))
-    .pipe(notify({
-      message: 'Javascript Minify Success'
-    }))
+    .on('end', () => { log.info('JS minification successful'); })
 );
 
 
@@ -165,9 +155,7 @@ const compileCSSPreflight = () => (
       })
     ]))
     .pipe(dest(paths.css.dest))
-    .pipe(notify({
-      message: 'CSS & Tailwind [PREFLIGHT] Success'
-    }))
+    .on('end', () => { log.info('CSS preflight successful'); })
 );
 
 
@@ -184,9 +172,7 @@ const minifyCSSPreflight = () => (
       suffix: '.min'
     }))
     .pipe(dest(paths.css.dest))
-    .pipe(notify({
-      message: 'Minify CSS [PREFLIGHT] Success'
-    }))
+    .on('end', () => { log.info('CSS minification preflight successful'); })
 );
 
 
